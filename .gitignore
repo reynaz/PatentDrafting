@@ -1,0 +1,15 @@
+# Gizli anahtarlar
+.env
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# macOS / editör
+.DS_Store
+.vscode/
+.idea/

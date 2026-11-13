@@ -1,0 +1,36 @@
+# Pipeline yapılandırması (model_a)
+# Tüm oranlar ve yollar tek yerde; kod bunları buradan okur.
+
+ipc_alanlari: [A47, A61, B60, G06, H01]
+
+veri_yollari:
+  ham: data/raw
+  islenmis: data/processed
+  exports: data/exports
+  raporlar: data/reports
+
+dataset_assignment:
+  tur2_orani: 0.50          # paketlerin yarısı Tür 2 (soru-cevaplı)
+  raporsuz_orani: 0.20      # %20 pakette ön araştırma raporu yok
+  test_orani: 0.20          # 800/200 -> ~%20 test
+  # bu patentler teste KONULMAZ (altın örnek + prompt denemeleri)
+  testten_haric:
+    - ornek_bbf_klips
+    - ornek_bbf_tusas
+
+divider:                     # bkz. docs/bolucu-kurallari-v0.2.md
+  olasilik_tablosu: model_a/configs/bbf_olasilik_tablosu_v0.2.xlsx
+  max_bilgi: 4
+  max_sk: 2
+  netlestirme_orani: 0.30   # yalnız sayısal koşullarda
+  bilinmiyor_orani: 0.20    # boş aday alanı olan paketlerde
+
+quality:                    # eşikler kararlaşınca güncellenecek
+  kopya_olcusu: ngram       # ngram | lcs  (KARAR BEKLİYOR)
+  kopya_esigi: 0.30         # taslak
+  kapsama_bolme: kod        # kod | llm   (KARAR BEKLİYOR)
+
+model_a_llm:
+  saglayici: openrouter
+  cache: true               # çıktısı olan patent yeniden çağrılmaz (bütçe)
+  butce_usd: 20

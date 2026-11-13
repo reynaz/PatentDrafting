@@ -1,0 +1,846 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://istem-proje/schemas/bbf.schema.json",
+  "title": "Kanonik Buluş Bildirim Formu (BBF)",
+  "description": "Sürüm 0.1. Model A çıktısı, normalizer çıktısı ve Model B girdisi bu şemaya uyar. Kişisel/idari/ticari bilgi içermez. İstem dili ('…ile karakterize edilmektedir') ve şekil referans numaraları ('gövde (1)') kullanılmaz.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sema_surumu",
+    "baslik",
+    "bulus_turu",
+    "teknik_alan",
+    "onceki_teknik",
+    "teknik_problem",
+    "unsurlar",
+    "detayli_aciklama",
+    "sekiller",
+    "avantajlar"
+  ],
+  "properties": {
+    "sema_surumu": {
+      "const": "0.1"
+    },
+    "baslik": {
+      "type": "object",
+      "description": "Buluşun kısa ve tanımlayıcı adı; marka içermez.",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "bulus_turu": {
+      "type": "object",
+      "description": "Buluşun koruma kategorisi; birden fazla olabilir. Veri üretiminde kod (bağımsız istemler) belirler, gerçek kullanımda normalizer.",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "cihaz",
+                  "yontem",
+                  "bilesim",
+                  "kullanim"
+                ]
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "teknik_alan": {
+      "type": "object",
+      "description": "Buluşun ilgili olduğu teknik alan; 1-3 cümle, genel.",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "onceki_teknik": {
+      "type": "object",
+      "description": "Mevcut çözümler/uygulamalar ve nasıl çalıştıkları.",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "teknik_problem": {
+      "type": "object",
+      "description": "Mevcut çözümlerin eksikleri ve buluşun çözdüğü teknik problem.",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "unsurlar": {
+      "type": "object",
+      "description": "Buluşun çekirdeği: parçalar, adımlar veya bileşenler (tek liste, tur etiketiyle).",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "tur",
+                  "ad",
+                  "islev",
+                  "yeni",
+                  "zorunlu"
+                ],
+                "properties": {
+                  "tur": {
+                    "type": "string",
+                    "enum": [
+                      "parca",
+                      "adim",
+                      "bilesen"
+                    ],
+                    "description": "parca: fiziksel bileşen (gövde, valf) | adim: sırayla yapılan işlem | bilesen: karışımın içeriği"
+                  },
+                  "ad": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Unsurun adı. Belge boyunca AYNI ad kullanılmalı (terim sözlüğü)."
+                  },
+                  "islev": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Unsurun buluştaki görevi; buluşçu dilinde, 1-2 cümle"
+                  },
+                  "yeni": {
+                    "type": "boolean",
+                    "description": "true: önceki teknikte yok, buluşun yenilik getiren kısmı"
+                  },
+                  "zorunlu": {
+                    "type": "boolean",
+                    "description": "true: çıkarılırsa buluş çalışmaz (bağımsız isteme aday) | false: çıkarılsa da buluş işler (bağımlı isteme aday)"
+                  },
+                  "sira": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 1,
+                    "description": "Yalnızca tur=adim için zorunlu: işlem sırası"
+                  },
+                  "kosul": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Sayısal değer/aralık/koşul: '120-150 °C, 30 dk' (adım), 'ağırlıkça %60-70' (bileşen), '0,2-0,5 mm' (parça). Uydurma; yoksa null"
+                  },
+                  "baglantilar": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "description": "tur=parca için: bağlı/etkileştiği diğer unsurların adları"
+                  }
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "detayli_aciklama": {
+      "type": "object",
+      "description": "Buluşun nasıl yapıldığı ve çalıştığı; buluşçu dilinde, ayrıntılı.",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "sekiller": {
+      "type": "object",
+      "description": "Her şeklin ne gösterdiği; referans numarası olmadan. Şekil yoksa deger=[].",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "no",
+                  "aciklama"
+                ],
+                "properties": {
+                  "no": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "aciklama": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "avantajlar": {
+      "type": "object",
+      "description": "Buluşun mevcut çözümlere göre somut avantajları (madde madde).",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "kisa_aciklama": {
+      "type": "object",
+      "description": "Buluşun 2-4 cümlelik özeti.",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "alternatifler": {
+      "type": "object",
+      "description": "Aynı işi gören alternatif yapı/malzeme/yöntemler, başka kullanım biçimleri.",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "uygulama_alanlari": {
+      "type": "object",
+      "description": "Buluşun kullanılabileceği sektör ve uygulamalar.",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "deney_sonuclari": {
+      "type": "object",
+      "description": "Yapılan test/deney ve sonuçları (sayısal ise birimiyle).",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "bilinen_belgeler": {
+      "type": "object",
+      "description": "Buluşçunun bildiği en yakın patent/yayınlar ve buluştan farkı. Numara yalnızca gerçek kaynaktan; asla uydurulmaz.",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "numara",
+                  "fark"
+                ],
+                "properties": {
+                  "numara": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "ozet": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "fark": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "anahtar_kavramlar": {
+      "type": "object",
+      "description": "Arama için Türkçe ve İngilizce terimler.",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "tr",
+                "en"
+              ],
+              "properties": {
+                "tr": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "en": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "arama_ozeti": {
+      "type": "object",
+      "description": "Ön araştırma araması için buluşun teknik çekirdeği, 3-4 cümle.",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    },
+    "ek_bilgiler": {
+      "type": "object",
+      "description": "Şemada karşılığı olmayan TEKNİK bilgiler; orijinal başlığıyla. Hiçbir bilgi atılmaz.",
+      "additionalProperties": false,
+      "required": [
+        "deger",
+        "durum"
+      ],
+      "properties": {
+        "deger": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "orijinal_baslik",
+                  "icerik"
+                ],
+                "properties": {
+                  "orijinal_baslik": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "icerik": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durum": {
+          "type": "string",
+          "enum": [
+            "dolu",
+            "turetildi",
+            "sorulmamis",
+            "bos_birakilmis"
+          ],
+          "description": "dolu: kaynakta doğrudan var | turetildi: başka bir bölümden çıkarıldı (kaynak zorunlu) | sorulmamis: kaynak form bu bilgiyi sormuyor | bos_birakilmis: soruluyor ama boş"
+        },
+        "kaynak": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "durum=turetildi ise: bilginin alındığı bölümün adı veya kısa alıntı"
+        }
+      }
+    }
+  }
+}

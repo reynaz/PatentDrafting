@@ -1,0 +1,86 @@
+{
+  "sema_surumu": "0.1",
+  "bulus": {
+    "baslik": "Hava aracında akışkan tahliye, depolama ve yönlendirme sistemi",
+    "arama_ozeti": "Hava aracında akışkanın bir giriş deliğinden alınıp yönlendirici valf ile birden fazla yönlendirme hattından birine yönlendirildiği, böylece akışkanın bir haznede depolanabildiği, kullanılabildiği veya tahliye edilebildiği sistem ve yöntem."
+  },
+  "ipc_siniflari": [
+    "B64D"
+  ],
+  "arama_bilgisi": {
+    "veri_tabani": "Google Patents Public Data (BigQuery), IPC filtreli",
+    "sorgu_metni": "(arama_ozeti)",
+    "embedding_modeli": "BAAI/bge-m3",
+    "reranker": "BAAI/bge-reranker-v2-m3",
+    "aday_sayisi": 100,
+    "kesim_tarihi": "2026-01-15",
+    "arama_tarihi": "2026-10-21"
+  },
+  "belgeler": [
+    {
+      "sira": 1,
+      "numara": "ORNEK-0001",
+      "baslik": "Örnek belge başlığı 1",
+      "yayin_tarihi": "2019-05-02",
+      "ipc": [
+        "B64D 11/02"
+      ],
+      "benzerlik_skoru": 0.81,
+      "kategori": "Y",
+      "kategori_gerekcesi": "Giriş deliği ve hazneyi içeriyor; hatlar arası seçim yapan valf yok, ORNEK-0002 ile birlikte ele alınmalı.",
+      "ilgili_unsurlar": [
+        "Giriş deliği",
+        "Hazne"
+      ],
+      "karsilastirma": {
+        "benzerlik": "Akışkan bir girişten alınıp haznede depolanıyor.",
+        "fark": "Tek hat var; yönlendirici valf ile hat seçimi yok."
+      },
+      "y_birlikte": [
+        "ORNEK-0002"
+      ]
+    },
+    {
+      "sira": 2,
+      "numara": "ORNEK-0002",
+      "baslik": "Örnek belge başlığı 2",
+      "yayin_tarihi": "2021-11-18",
+      "ipc": [
+        "F16K 11/00"
+      ],
+      "benzerlik_skoru": 0.74,
+      "kategori": "Y",
+      "kategori_gerekcesi": "Birden fazla hat arasında seçim yapan valf anlatılıyor, ancak hava aracı akışkan tahliyesi bağlamında değil.",
+      "ilgili_unsurlar": [
+        "Yönlendirici valf",
+        "Yönlendirme hatları"
+      ],
+      "karsilastirma": {
+        "benzerlik": "Valf akışı birden fazla hattan birine yönlendiriyor.",
+        "fark": "Hazne ve hava aracı uygulaması yok."
+      },
+      "y_birlikte": [
+        "ORNEK-0001"
+      ]
+    },
+    {
+      "sira": 3,
+      "numara": "ORNEK-0003",
+      "baslik": "Örnek belge başlığı 3",
+      "yayin_tarihi": "2015-03-10",
+      "ipc": [
+        "B64D 37/00"
+      ],
+      "benzerlik_skoru": 0.52,
+      "kategori": "A",
+      "kategori_gerekcesi": "Hava aracında akışkan tahliyesine genel bilgi veriyor; buluşun unsurlarını içermiyor.",
+      "ilgili_unsurlar": [],
+      "karsilastirma": {
+        "benzerlik": "Aynı teknik alanda.",
+        "fark": "Yönlendirme ve depolama seçeneği yok."
+      }
+    }
+  ],
+  "genel_degerlendirme": "En yakın belgeler ORNEK-0001 ve ORNEK-0002; birlikte ele alındığında giriş, valf ve hazne bilinen unsurlar. Buluşun öne çıkan farkı, akışkanın depolama, kullanım ve tahliye arasında hat seçimiyle yönlendirilmesi; yenilik açısından 'Hattın seçilmesi' adımı vurgulanmalı.",
+  "uyari": "Bu rapor otomatik bir ön araştırmadır; resmî araştırma raporu değildir. Kategoriler yalnızca belge özetlerine dayanan önerilerdir."
+}
